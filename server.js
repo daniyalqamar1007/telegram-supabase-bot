@@ -1,16 +1,25 @@
 const express = require('express');
-// const fetch = require('node-fetch');
 const axios = require('axios')
 const { createClient } = require('@supabase/supabase-js');
+require('dotenv').config();
 
 const app = express();
 app.use(express.json());
 
+
 // Load environment variables
-const TELEGRAM_BOT_TOKEN = "7543018931:AAFnbnDaO9hocMkuTSRJcqcnWsDhtC_eFUI";
-const SUPABASE_URL = "https://robxclilgydaisjbnhjf.supabase.co";
-const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJvYnhjbGlsZ3lkYWlzamJuaGpmIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc0MTg5ODU0NSwiZXhwIjoyMDU3NDc0NTQ1fQ.WDWgH8qmzFwuKhIAmFnisApiKh-U2fyW_JPNBxaMdQE";
-const WEBHOOK_URL = "https://b675-182-181-176-143.ngrok-free.app/webhook";
+const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
+const SUPABASE_URL = process.env.SUPABASE_URL;
+const SUPABASE_KEY = process.env.SUPABASE_KEY;
+const WEBHOOK_URL = process.env.WEBHOOK_URL;
+
+const requiredEnvVars = ['TELEGRAM_BOT_TOKEN', 'SUPABASE_URL', 'SUPABASE_KEY', 'WEBHOOK_URL'];
+
+requiredEnvVars.forEach((key) => {
+    if (!process.env[key]) {
+        throw new Error(`Missing required environment variable: ${key}`);
+    }
+});
 
 // Initialize Supabase Client
 const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
