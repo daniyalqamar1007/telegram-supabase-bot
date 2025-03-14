@@ -27,6 +27,7 @@ TELEGRAM_BOT_TOKEN=your_telegram_bot_token
 SUPABASE_URL=your_supabase_url
 SUPABASE_KEY=your_supabase_key
 PORT=4000
+WEBHOOK_URL=your_webhook_url
 ```
 
 ## Running the Server
